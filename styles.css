@@ -1,0 +1,295 @@
+/* Reset basico de estilos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+    background-color: #f0f2f5;
+    color: #333333;
+}
+
+/* Estilos de encabezado */
+header {
+    background-color: #1b365d;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.titulo-portal h1 {
+    font-size: 1.5rem;
+}
+
+.titulo-portal p {
+    font-size: 0.85rem;
+    color: #d0dce5;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: #0056b3;
+}
+
+.enlace-salir {
+    background-color: #dc3545;
+}
+
+.enlace-salir:hover {
+    background-color: #bd2130;
+}
+
+/* Contenedor principal */
+main {
+    width: 90%;
+    max-width: 1000px;
+    margin: 30px auto;
+}
+
+/* Manejo de pantallas */
+.pantalla {
+    display: none;
+}
+
+.pantalla.activa {
+    display: block;
+}
+
+/* Estilos de Login */
+.seccion-login {
+    background-color: #ffffff;
+    max-width: 450px;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.seccion-login h2 {
+    color: #1b365d;
+    margin-bottom: 10px;
+}
+
+.seccion-login p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Bienvenida y Tarjetas */
+.bienvenida {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    margin-bottom: 25px;
+}
+
+.bienvenida h2 {
+    color: #1b365d;
+    margin-bottom: 10px;
+}
+
+.boton-principal {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    margin-top: 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.contenedor-tarjetas {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.tarjeta {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 48%;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.tarjeta img {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 15px;
+    background-color: #f0f4f8;
+    padding: 12px;
+    border-radius: 50%;
+}
+
+.boton-tarjeta {
+    background-color: #1b365d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Tablas y paneles de Administracion (COPACI y Admin) */
+.seccion-admin-panel {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.tabla-contenedor {
+    overflow-x: auto;
+    margin-top: 15px;
+}
+
+.tabla-gestion {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.tabla-gestion th, .tabla-gestion td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.tabla-gestion th {
+    background-color: #1b365d;
+    color: white;
+}
+
+.badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.badge.pendiente {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.badge.en-proceso {
+    background-color: #cce5ff;
+    color: #004085;
+}
+
+.btn-tabla {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Tarjetas Estadisticas para el Admin */
+.tarjeta-stat {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 31%;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    border-top: 4px solid #1b365d;
+}
+
+.numero-stat {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #1b365d;
+    margin-top: 10px;
+}
+
+.cuadro-avisos {
+    background-color: #fff3cd;
+    border-left: 6px solid #ffc107;
+    padding: 20px;
+    margin-top: 25px;
+    border-radius: 6px;
+}
+
+/* Formularios */
+.boton-volver {
+    background: none;
+    border: none;
+    color: #1b365d;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.seccion-formulario {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.grupo-campo {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.grupo-campo label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #1b365d;
+}
+
+.grupo-campo input, .grupo-campo select, .grupo-campo textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.mensaje-exito {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* Pie de pagina */
+footer {
+    background-color: #1b365d;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    font-size: 0.9rem;
+}
+

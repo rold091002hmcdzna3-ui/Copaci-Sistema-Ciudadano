@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestion Ciudadana - COPACI Granjas Guadalupe</title>
+    <!-- Vinculo obligatorio a la hoja de estilos externa -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Encabezado principal con navegacion dinamica -->
+    <header id="barra-encabezado" style="display: none;">
+        <div class="titulo-portal">
+            <h1>COPACI Granjas Guadalupe</h1>
+            <p id="rol-usuario-texto">Atencion Ciudadana</p>
+        </div>
+        <nav>
+            <ul id="menu-navegacion">
+                <!-- Se llena dinamicamente con JavaScript segun el rol -->
+            </ul>
+        </nav>
+    </header>
+
+    <!-- CONTENEDOR DE PANTALLAS -->
+    <main>
+
+        <!-- ========================================== -->
+        <!-- PANTALLA 0: INICIO DE SESION (LOGIN) -->
+        <!-- ========================================== -->
+        <div id="pantalla-login" class="pantalla activa">
+            <section class="seccion-login">
+                <h2>Inicio de Sesion</h2>
+                <p>Selecciona tu tipo de usuario e ingresa tus credenciales para acceder al sistema.</p>
+                
+                <form onsubmit="iniciarSesion(event)">
+                    <div class="grupo-campo">
+                        <label for="tipo-usuario">Tipo de Usuario:</label>
+                        <select id="tipo-usuario" required>
+                            <option value="">Selecciona un rol</option>
+                            <option value="Ciudadano">Ciudadano</option>
+                            <option value="COPACI">Administrador Municipal (COPACI)</option>
+                            <option value="Admin">Administrador General</option>
+                        </select>
+                    </div>
+
+                    <div class="grupo-campo">
+                        <label for="usuario-login">Usuario o Correo:</label>
+                        <input type="text" id="usuario-login" required placeholder="Ingresa tu usuario">
+                    </div>
+
+                    <div class="grupo-campo">
+                        <label for="password-login">Contrasena:</label>
+                        <input type="password" id="password-login" required placeholder="Ingresa tu contrasena">
+                    </div>
+
+                    <button type="submit" class="boton-principal">Ingresar al Sistema</button>
+                </form>
+            </section>
+        </div>
+
+
+        <!-- ========================================== -->
+        <!-- PANTALLA 1: VISTA CIUDADANO -->
+        <!-- ========================================== -->
+        <div id="pantalla-ciudadano" class="pantalla">
+            
+            <section class="bienvenida">
+                <h2>Portal de Atención Ciudadana</h2>
+                <p>Bienvenido. Aqui puedes solicitar tus constancias oficiales y enviar reportes sobre la colonia.</p>
+                <button class="boton-principal" onclick="mostrarPantalla('pantalla-formularios')">Iniciar un Tramite o Reporte</button>
+            </section>
+
+            <section class="seccion-tramites">
+                <h2>Servicios para Ciudadanos</h2>
+                <div class="contenedor-tarjetas">
+                    
+                    <article class="tarjeta">
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231b365d'><path d='M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z'/></svg>" alt="Icono Constancia">
+                        <h3>Constancia Domiciliaria</h3>
+                        <p>Acredita tu residencia oficial en la colonia Granjas Guadalupe.</p>
+                        <button class="boton-tarjeta" onclick="abrirFormulario('constancia')">Solicitar Constancia</button>
+                    </article>
+
+                    <article class="tarjeta">
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231b365d'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z'/></svg>" alt="Icono Reporte">
+                        <h3>Reportes Comunitarios</h3>
+                        <p>Notifica fallas de agua, alumbrado publico o limpieza urbana.</p>
+                        <button class="boton-tarjeta" onclick="abrirFormulario('reporte')">Realizar Reporte</button>
+                    </article>
+
+                </div>
+            </section>
+
+            <aside class="cuadro-avisos">
+                <h3>Avisos Comunitarios</h3>
+                <ul>
+                    <li><strong>Junta Comunal:</strong> Sabado a las 10:00 AM en la explanada principal.</li>
+                    <li><strong>Jornada de Limpieza:</strong> Apoya en las labores comunitarias del mes.</li>
+                </ul>
+            </aside>
+        </div>
+
+
+        <!-- ========================================== -->
+        <!-- PANTALLA 2: VISTA COPACI (ADMIN MUNICIPAL) -->
+        <!-- ========================================== -->
+        <div id="pantalla-copaci" class="pantalla">
+            <section class="bienvenida">
+                <h2>Panel de Administracion COPACI</h2>
+                <p>Gestion de solicitudes y atencion a los ciudadanos de Granjas Guadalupe.</p>
+            </section>
+
+            <section class="seccion-admin-panel">
+                <h2>Solicitudes y Reportes Recibidos</h2>
+                <div class="tabla-contenedor">
+                    <table class="tabla-gestion">
+                        <thead>
+                            <tr>
+                                <th>Folio</th>
+                                <th>Ciudadano</th>
+                                <th>Tipo de Tramite</th>
+                                <th>Estatus</th>
+                                <th>Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#CD-102</td>
+                                <td>Juan Perez</td>
+                                <td>Constancia Domiciliaria</td>
+                                <td><span class="badge pendiente">Pendiente</span></td>
+                                <td><button class="btn-tabla" onclick="alert('Solicitud Aprobada')">Aprobar</button></td>
+                            </tr>
+                            <tr>
+                                <td>#RP-084</td>
+                                <td>Maria Lopez</td>
+                                <td>Alumbrado Publico</td>
+                                <td><span class="badge en-proceso">En Proceso</span></td>
+                                <td><button class="btn-tabla" onclick="alert('Reporte Atendido')">Atender</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+
+        <!-- ========================================== -->
+        <!-- PANTALLA 3: VISTA ADMINISTRADOR GENERAL -->
+        <!-- ========================================== -->
+        <div id="pantalla-admin" class="pantalla">
+            <section class="bienvenida">
+                <h2>Panel de Control Global (Administrador)</h2>
+                <p>Vista completa del sistema, estadisticas de operacion y control de usuarios.</p>
+            </section>
+
+            <div class="contenedor-tarjetas">
+                <article class="tarjeta-stat">
+                    <h3>Total Usuarios</h3>
+                    <p class="numero-stat">1,240</p>
+                </article>
+                <article class="tarjeta-stat">
+                    <h3>Tramites Mes</h3>
+                    <p class="numero-stat">85</p>
+                </article>
+                <article class="tarjeta-stat">
+                    <h3>Reportes Resueltos</h3>
+                    <p class="numero-stat">92%</p>
+                </article>
+            </div>
+
+            <section class="seccion-admin-panel" style="margin-top: 25px;">
+                <h2>Control Global del Sistema</h2>
+                <p>Acceso directo a todos los modulos del sistema municipal.</p>
+                <br>
+                <button class="boton-principal" style="width: auto; margin-right: 10px;" onclick="mostrarPantalla('pantalla-ciudadano')">Ver Vista Ciudadano</button>
+                <button class="boton-principal" style="width: auto; background-color: #1b365d;" onclick="mostrarPantalla('pantalla-copaci')">Ver Panel COPACI</button>
+            </section>
+        </div>
+
+
+        <!-- ========================================== -->
+        <!-- PANTALLA 4: SOLICITAR Y REPORTAR -->
+        <!-- ========================================== -->
+        <div id="pantalla-formularios" class="pantalla">
+            <button class="boton-volver" onclick="regresarSegunRol()">&larr; Volver al Panel</button>
+
+            <!-- FORMULARIO 1: CONSTANCIA DOMICILIARIA -->
+            <section id="form-constancia" class="seccion-formulario">
+                <h2>Solicitud de Constancia Domiciliaria</h2>
+                <p>Ingresa tus datos para generar tu solicitud oficial.</p>
+                
+                <form onsubmit="procesarFormulario(event, 'Constancia Domiciliaria')">
+                    <div class="grupo-campo">
+                        <label for="nombre-constancia">Nombre Completo:</label>
+                        <input type="text" id="nombre-constancia" required placeholder="Ej. Juan Perez">
+                    </div>
+                    <div class="grupo-campo">
+                        <label for="direccion-constancia">Direccion en Granjas Guadalupe:</label>
+                        <input type="text" id="direccion-constancia" required placeholder="Calle, Numero exterior/interior">
+                    </div>
+                    <div class="grupo-campo">
+                        <label for="telefono-constancia">Telefono de Contacto:</label>
+                        <input type="tel" id="telefono-constancia" required placeholder="5512345678">
+                    </div>
+                    <button type="submit" class="boton-principal">Enviar Solicitud</button>
+                </form>
+            </section>
+
+            <!-- FORMULARIO 2: REPORTES COMUNITARIOS -->
+            <section id="form-reporte" class="seccion-formulario">
+                <h2>Reporte Comunitario</h2>
+                <p>Notifica una falla o necesidad de mantenimiento en la colonia.</p>
+                
+                <form onsubmit="procesarFormulario(event, 'Reporte Comunitario')">
+                    <div class="grupo-campo">
+                        <label for="tipo-reporte">Tipo de Falla:</label>
+                        <select id="tipo-reporte" required>
+                            <option value="">Selecciona una opcion</option>
+                            <option value="Alumbrado Publico">Alumbrado Publico</option>
+                            <option value="Fuga de Agua / Drenaje">Fuga de Agua / Drenaje</option>
+                            <option value="Mantenimiento de Areas Verdes">Mantenimiento de Areas Verdes</option>
+                            <option value="Seguridad / Vigilancia">Seguridad / Vigilancia</option>
+                        </select>
+                    </div>
+                    <div class="grupo-campo">
+                        <label for="ubicacion-reporte">Ubicacion del Problema:</label>
+                        <input type="text" id="ubicacion-reporte" required placeholder="Esquina o referencia cercana">
+                    </div>
+                    <div class="grupo-campo">
+                        <label for="descripcion-reporte">Descripcion de la situacion:</label>
+                        <textarea id="descripcion-reporte" rows="4" required placeholder="Describe brevemente el problema..."></textarea>
+                    </div>
+                    <button type="submit" class="boton-principal">Enviar Reporte</button>
+                </form>
+            </section>
+
+            <!-- MENSAJE DE CONFIRMACION -->
+            <div id="mensaje-exito" class="mensaje-exito" style="display: none;">
+                <h3 id="texto-exito">Tramite enviado con exito!</h3>
+                <p>Hemos recibido tu solicitud. El equipo del COPACI se pondra en contacto a la brevedad.</p>
+                <button class="boton-tarjeta" onclick="regresarSegunRol()">Volver al Panel</button>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Pie de pagina -->
+    <footer>
+        <p>&copy; 2026 COPACI Granjas Guadalupe. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- SCRIPT JS PARA LOGICA DE ROLES Y NAVEGACION -->
+    <script>
+        let rolActual = '';
+
+        function iniciarSesion(event) {
+            event.preventDefault();
+            rolActual = document.getElementById('tipo-usuario').value;
+            
+            document.getElementById('rol-usuario-texto').innerText = 'Sesion iniciada como: ' + rolActual;
+            document.getElementById('barra-encabezado').style.display = 'flex';
+            
+            configurarMenuSegunRol(rolActual);
+
+            if (rolActual === 'Ciudadano') {
+                mostrarPantalla('pantalla-ciudadano');
+            } else if (rolActual === 'COPACI') {
+                mostrarPantalla('pantalla-copaci');
+            } else if (rolActual === 'Admin') {
+                mostrarPantalla('pantalla-admin');
+            }
+        }
+
+        function configurarMenuSegunRol(rol) {
+            const menu = document.getElementById('menu-navegacion');
+            menu.innerHTML = '';
+
+            if (rol === 'Ciudadano') {
+                menu.innerHTML = `
+                    <li><a href="#" onclick="mostrarPantalla('pantalla-ciudadano')">Inicio</a></li>
+                    <li><a href="#" onclick="mostrarPantalla('pantalla-formularios')">Tramites</a></li>
+                    <li><a href="#" onclick="cerrarSesion()" class="enlace-salir">Cerrar Sesion</a></li>
+                `;
+            } else if (rol === 'COPACI') {
+                menu.innerHTML = `
+                    <li><a href="#" onclick="mostrarPantalla('pantalla-copaci')">Gestion COPACI</a></li>
+                    <li><a href="#" onclick="mostrarPantalla('pantalla-formularios')">Registrar Solicitud</a></li>
+                    <li><a href="#" onclick="cerrarSesion()" class="enlace-salir">Cerrar Sesion</a></li>
+                `;
+            } else if (rol === 'Admin') {
+                menu.innerHTML = `
+                    <li><a href="#" onclick="mostrarPantalla('pantalla-admin')">Panel Global</a></li>
+                    <li><a href="#" onclick="mostrarPantalla('pantalla-copaci')">Vista COPACI</a></li>
+                    <li><a href="#" onclick="mostrarPantalla('pantalla-ciudadano')">Vista Ciudadano</a></li>
+                    <li><a href="#" onclick="cerrarSesion()" class="enlace-salir">Cerrar Sesion</a></li>
+                `;
+            }
+        }
+
+        function regresarSegunRol() {
+            if (rolActual === 'Ciudadano') mostrarPantalla('pantalla-ciudadano');
+            else if (rolActual === 'COPACI') mostrarPantalla('pantalla-copaci');
+            else if (rolActual === 'Admin') mostrarPantalla('pantalla-admin');
+            else mostrarPantalla('pantalla-login');
+        }
+
+        function cerrarSesion() {
+            rolActual = '';
+            document.getElementById('barra-encabezado').style.display = 'none';
+            mostrarPantalla('pantalla-login');
+        }
+
+        function mostrarPantalla(idPantalla) {
+            document.querySelectorAll('.pantalla').forEach(p => p.classList.remove('activa'));
+            document.getElementById(idPantalla).classList.add('activa');
+            document.getElementById('mensaje-exito').style.display = 'none';
+        }
+
+        function abrirFormulario(tipo) {
+            mostrarPantalla('pantalla-formularios');
+            document.getElementById('form-constancia').style.display = 'none';
+            document.getElementById('form-reporte').style.display = 'none';
+
+            if (tipo === 'constancia') {
+                document.getElementById('form-constancia').style.display = 'block';
+            } else if (tipo === 'reporte') {
+                document.getElementById('form-reporte').style.display = 'block';
+            }
+        }
+
+        function procesarFormulario(event, titulo) {
+            event.preventDefault();
+            document.getElementById('form-constancia').style.display = 'none';
+            document.getElementById('form-reporte').style.display = 'none';
+            
+            document.getElementById('texto-exito').innerText = titulo + ' enviado con exito!';
+            document.getElementById('mensaje-exito').style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
+
